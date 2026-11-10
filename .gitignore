@@ -1,0 +1,33 @@
+# Java / Maven
+backend/target/
+*.class
+*.jar
+
+# React / Node
+frontend/node_modules/
+frontend/dist/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Database files
+*.db
+*.mv.db
+*.trace.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

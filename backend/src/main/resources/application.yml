@@ -1,0 +1,77 @@
+spring:
+  application:
+    name: recall-traceability
+  datasource:
+    url: jdbc:h2:file:./data/recall;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
+    properties:
+      hibernate.format_sql: false
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+app:
+  # Load data/sample (the base demo scenario) on first start when the database is empty.
+  seed:
+    enabled: true
+    # relative to the classpath (bundled copy) - override with file:/path to point at ../data/sample
+    location: classpath:seed/
+  cors:
+    allowed-origins: "http://localhost:5173,http://localhost:3000"
+
+---
+# ---------------------------------------------------------------- AWS / RDS PostgreSQL
+spring:
+  config:
+    activate:
+      on-profile: postgres
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://postgres:5432/recall}
+    username: ${DB_USER:recall}
+    password: ${DB_PASSWORD:recall}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate          # schema is owned by sql/postgres/schema.sql
+  h2:
+    console:
+      enabled: false
+
+---
+# ---------------------------------------------------------------- Snowflake (analytics mirror; build with mvn -Psnowflake)
+spring:
+  config:
+    activate:
+      on-profile: snowflake
+  datasource:
+    url: ${SNOWFLAKE_URL:jdbc:snowflake://<account>.snowflakecomputing.com/?db=RECALL_DB&schema=TRACE&warehouse=RECALL_WH}
+    username: ${SNOWFLAKE_USER}
+    password: ${SNOWFLAKE_PASSWORD}
+    driver-class-name: net.snowflake.client.jdbc.SnowflakeDriver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

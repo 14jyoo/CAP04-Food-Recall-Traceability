@@ -1,0 +1,16 @@
+package com.fyndig.recall.repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.fyndig.recall.entity.*;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface NotificationRepo extends JpaRepository<Notification, Long> {
+    List<Notification> findByRecall_Id(Long recallId);
+    long countByRecall_IdAndStatusNot(Long recallId, Notification.Status status);
+    void deleteByRecall_Id(Long recallId);
+}
