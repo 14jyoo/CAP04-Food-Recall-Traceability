@@ -1,0 +1,5 @@
+supplier_code,supplier_name,country,contact_email,aliases
+SUP0001,Andhra Spice Co,IN,qa@andhraspice.example,S-001|AndhraSpice|SUP-1
+SUP0002,Deccan Dairy Ingredients,IN,quality@deccandairy.example,DDI-02
+SUP0003,Coastal Oils Ltd,IN,recalls@coastaloils.example,CO-3
+SUP0004,Nilgiri Flour Mills,IN,qc@nilgiriflour.example,NFM

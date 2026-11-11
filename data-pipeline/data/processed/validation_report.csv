@@ -1,0 +1,7 @@
+dataset,record_id,field,value,issue,severity
+supplier_lots,DD-2201,Vendor,Supplier 2,Unknown supplier code,WARNING
+goods_receipts,GRN-1007,Vendor ID,ASC-01,Unknown supplier code,WARNING
+dispatches,SHP-0001,Shipment ID,SHP-0001,Duplicate shipment ID,ERROR
+dispatches,SHP-0001,Shipment ID,SHP-0001,Duplicate shipment ID,ERROR
+dispatches,SHP-0014,Qty Shipped,-5,Quantity must be greater than zero,ERROR
+movements,MOV-2018,type,TELEPORT,Invalid movement type,ERROR
