@@ -1,0 +1,3 @@
+dataset,record_id,original_code,suggested_supplier,reason,confidence,status
+supplier_lots,DD-2201,Supplier 2,SUP0002,Supplier name suggests supplier 2; lot and material are consistent with Deccan Dairy Ingredients,MEDIUM,PENDING_REVIEW
+goods_receipts,GRN-1007,ASC-01,SUP0001,Lot AB-7781 and paprika material match another receipt from SUP0001; ASC-01 is not a registered alias,MEDIUM,PENDING_REVIEW

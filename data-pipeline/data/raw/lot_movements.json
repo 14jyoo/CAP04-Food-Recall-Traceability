@@ -1,0 +1,24 @@
+{
+  "system": "MES",
+  "exported_at": "2026-03-15T06:00:00",
+  "records": [
+    {"txn_id": "MOV-2001", "type": "CONSUME", "input_lot": "ING-24-0101", "output_lot": "FG-24-0210", "kind": "FG", "sku": "SKU-CHIPS-MASALA-50G", "product_name": "Masala Potato Chips 50g", "qty_used": "150", "unit": "kg", "timestamp": "2026-03-07T06:30:00", "line": "L1"},
+    {"txn_id": "MOV-2002", "type": "CONSUME", "input_lot": "ING-24-0201", "output_lot": "FG-24-0210", "kind": "FG", "sku": "SKU-CHIPS-MASALA-50G", "product_name": "Masala Potato Chips 50g", "qty_used": "200", "unit": "kg", "timestamp": "2026-03-07T06:30:00", "line": "L1"},
+    {"txn_id": "MOV-2003", "type": "CONSUME", "input_lot": "ING-24-0301", "output_lot": "FG-24-0210", "kind": "FG", "sku": "SKU-CHIPS-MASALA-50G", "product_name": "Masala Potato Chips 50g", "qty_used": "600", "unit": "L", "timestamp": "2026-03-07T06:30:00", "line": "L1"},
+    {"txn_id": "MOV-2004", "type": "CONSUME", "input_lot": "ING-24-0101", "output_lot": "FG-24-0211", "kind": "FG", "sku": "SKU-CHIPS-MASALA-50G", "product_name": "Masala Potato Chips 50g", "qty_used": "150", "unit": "kg", "timestamp": "2026-03-08T06:30:00", "line": "L2"},
+    {"txn_id": "MOV-2005", "type": "CONSUME", "input_lot": "ING-24-0301", "output_lot": "FG-24-0211", "kind": "FG", "sku": "SKU-CHIPS-MASALA-50G", "product_name": "Masala Potato Chips 50g", "qty_used": "600", "unit": "L", "timestamp": "2026-03-08T06:30:00", "line": "L2"},
+    {"txn_id": "MOV-2006", "type": "SPLIT", "input_lot": "FG-24-0211", "output_lot": "FG-24-0211-A", "kind": "FG", "qty_used": "250", "unit": "cases", "timestamp": "2026-03-09T10:00:00"},
+    {"txn_id": "MOV-2007", "type": "SPLIT", "input_lot": "FG-24-0211", "output_lot": "FG-24-0211-B", "kind": "FG", "qty_used": "150", "unit": "cases", "timestamp": "2026-03-09T10:00:00"},
+    {"txn_id": "MOV-2008", "type": "SPLIT", "input_lot": "ING-24-0102", "output_lot": "WIP-24-0102-A", "kind": "WIP", "qty_used": "60", "unit": "kg", "timestamp": "2026-03-07T12:00:00"},
+    {"txn_id": "MOV-2009", "type": "SPLIT", "input_lot": "ING-24-0102", "output_lot": "WIP-24-0102-B", "kind": "WIP", "qty_used": "40", "unit": "kg", "timestamp": "2026-03-07T12:00:00"},
+    {"txn_id": "MOV-2010", "type": "MERGE", "input_lot": "WIP-24-0102-A", "output_lot": "WIP-24-0150", "kind": "WIP", "sku": "BLEND-PERI-SEASONING", "product_name": "Peri-peri seasoning blend", "qty_used": "60", "unit": "kg", "timestamp": "2026-03-08T09:00:00"},
+    {"txn_id": "MOV-2011", "type": "MERGE", "input_lot": "ING-24-0104", "output_lot": "WIP-24-0150", "kind": "WIP", "sku": "BLEND-PERI-SEASONING", "product_name": "Peri-peri seasoning blend", "qty_used": "90", "unit": "kg", "timestamp": "2026-03-08T09:00:00"},
+    {"txn_id": "MOV-2012", "type": "CONSUME", "input_lot": "WIP-24-0150", "output_lot": "FG-24-0214", "kind": "FG", "sku": "SKU-CHIPS-PERI-50G", "product_name": "Peri-Peri Potato Chips 50g", "qty_used": "150", "unit": "kg", "timestamp": "2026-03-09T06:30:00", "line": "L3"},
+    {"txn_id": "MOV-2013", "type": "CONSUME", "input_lot": "ING-24-0301", "output_lot": "FG-24-0214", "kind": "FG", "sku": "SKU-CHIPS-PERI-50G", "product_name": "Peri-Peri Potato Chips 50g", "qty_used": "400", "unit": "L", "timestamp": "2026-03-09T06:30:00", "line": "L3"},
+    {"txn_id": "MOV-2014", "type": "CONSUME", "input_lot": "ING-24-0104", "output_lot": "FG-24-0215", "kind": "FG", "sku": "SKU-CRACKER-SPICED-100G", "product_name": "Spiced Crackers 100g", "qty_used": "120", "unit": "kg", "timestamp": "2026-03-10T06:30:00", "line": "L4"},
+    {"txn_id": "MOV-2015", "type": "CONSUME", "input_lot": "ING-24-0401", "output_lot": "FG-24-0215", "kind": "FG", "sku": "SKU-CRACKER-SPICED-100G", "product_name": "Spiced Crackers 100g", "qty_used": "1500", "unit": "kg", "timestamp": "2026-03-10T06:30:00", "line": "L4"},
+    {"txn_id": "MOV-2016", "type": "CONSUME", "input_lot": "ING-24-0401", "output_lot": "FG-24-0216", "kind": "FG", "sku": "SKU-CRACKER-PLAIN-100G", "product_name": "Plain Crackers 100g", "qty_used": "1500", "unit": "kg", "timestamp": "2026-03-11T06:30:00", "line": "L4"},
+    {"txn_id": "MOV-2017", "type": "CONSUME", "input_lot": "ING-24-0105", "output_lot": "FG-24-0213", "kind": "FG", "sku": "SKU-CHIPS-MASALA-50G", "product_name": "Masala Potato Chips 50g", "qty_used": "100", "unit": "kg", "timestamp": "2026-03-10T14:00:00", "line": "L1"},
+    {"txn_id": "MOV-2018", "type": "TELEPORT", "input_lot": "ING-24-0401", "output_lot": "FG-24-0299", "qty_used": "10", "unit": "kg", "timestamp": "2026-03-11T08:00:00"}
+  ]
+}

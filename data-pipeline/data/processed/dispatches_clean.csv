@@ -1,0 +1,16 @@
+Shipment ID,Sales Order,Line,Account,Account Name,Email,SKU,Batch No,Qty Shipped,Unit,Ship Date,Region,batch_no_normalized,quantity_normalized,unit_normalized,ship_date_normalized
+SHP-0001,ORD-1001,1,CUST-RT-01,FreshMart Retail,orders@freshmart.example,SKU-CHIPS-MASALA-50G,FG-24-0210,120,CS,12-Mar-2026,Telangana,FG240210,120,CS,2026-03-12
+SHP-0002,ORD-1002,1,CUST-RT-02,Daily Basket,buying@dailybasket.example,SKU-CHIPS-MASALA-50G,fg-24-0210,80,cases,2026-03-12,Andhra Pradesh,FG240210,80,CS,2026-03-12
+SHP-0003,ORD-1003,2,CUST-DS-01,Metro Distributors,ops@metrodist.example,SKU-CHIPS-MASALA-50G,FG-24-0210,200,CS,13/03/2026,Karnataka,FG240210,200,CS,2026-03-13
+SHP-0004,ORD-1004,1,CUST-RT-03,QuickKart,supply@quickkart.example,SKU-CHIPS-MASALA-50G,FG-24-0211-A,250,CS,2026-03-12,Tamil Nadu,FG240211A,250,CS,2026-03-12
+SHP-0005,ORD-1005,1,CUST-RT-01,FreshMart Retail,orders@freshmart.example,SKU-CHIPS-MASALA-50G,FG-24-0211-B,90,CS,2026-03-13,Telangana,FG240211B,90,CS,2026-03-13
+SHP-0006,ORD-1003,1,CUST-DS-01,Metro Distributors,ops@metrodist.example,SKU-CHIPS-MASALA-50G,FG-24-0211-B,60,CS,13/03/2026,Karnataka,FG240211B,60,CS,2026-03-13
+SHP-0007,ORD-1006,1,CUST-HR-01,Spice Route Restaurants,kitchen@spiceroute.example,SKU-CHIPS-PERI-50G,FG-24-0214,50,CS,2026-03-13,Telangana,FG240214,50,CS,2026-03-13
+SHP-0008,ORD-1008,1,CUST-RT-02,Daily Basket,buying@dailybasket.example,SKU-CHIPS-PERI-50G,FG-24-0214,40,CS,2026-03-14,Andhra Pradesh,FG240214,40,CS,2026-03-14
+SHP-0009,ORD-1007,1,CUST-RT-04,Village Grocers,owner@villagegrocers.example,SKU-CHIPS-MASALA-50G,FG-24-0213,100,CS,14-Mar-2026,Andhra Pradesh,FG240213,100,CS,2026-03-14
+SHP-0010,ORD-1010,1,CUST-RT-05,GreenLeaf Stores,purchase@greenleaf.example,SKU-CRACKER-SPICED-100G,FG-24-0215,300,CS,2026-03-14,Kerala,FG240215,300,CS,2026-03-14
+SHP-0011,ORD-1002,2,CUST-RT-02,Daily Basket,buying@dailybasket.example,SKU-CRACKER-SPICED-100G,FG-24-0215,70,CS,2026-03-14,Andhra Pradesh,FG240215,70,CS,2026-03-14
+SHP-0012,ORD-1009,1,CUST-RT-03,QuickKart,supply@quickkart.example,SKU-CRACKER-SPICED-100G,FG-24-0215,110,CS,2026-03-15,Tamil Nadu,FG240215,110,CS,2026-03-15
+SHP-0013,ORD-1011,1,CUST-DS-02,South Distributors,logistics@southdist.example,SKU-CRACKER-PLAIN-100G,FG-24-0216,500,CS,2026-03-15,Karnataka,FG240216,500,CS,2026-03-15
+SHP-0014,ORD-1012,1,CUST-RT-05,GreenLeaf Stores,purchase@greenleaf.example,SKU-CRACKER-PLAIN-100G,FG-24-0216,-5,CS,2026-03-15,Kerala,FG240216,-5,CS,2026-03-15
+SHP-0001,ORD-1001,1,CUST-RT-01,FreshMart Retail,orders@freshmart.example,SKU-CHIPS-MASALA-50G,FG-24-0210,120,CS,12-Mar-2026,Telangana,FG240210,120,CS,2026-03-12

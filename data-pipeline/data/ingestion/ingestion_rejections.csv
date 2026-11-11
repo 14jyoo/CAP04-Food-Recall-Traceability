@@ -1,0 +1,4 @@
+feed,recordId,reason
+MOVEMENTS,MOV-2018,Invalid movement type: TELEPORT
+DISPATCHES,SHP-0001,Duplicate shipment ID
+DISPATCHES,SHP-0014,Quantity must be greater than zero

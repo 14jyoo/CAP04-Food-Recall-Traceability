@@ -1,0 +1,3 @@
+dataset,record_id,original_code,approved_supplier,decision,reviewer,decision_date,notes
+supplier_lots,DD-2201,Supplier 2,,PENDING_REVIEW,,,
+goods_receipts,GRN-1007,ASC-01,,PENDING_REVIEW,,,

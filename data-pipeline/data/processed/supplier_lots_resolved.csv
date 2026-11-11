@@ -1,0 +1,6 @@
+Vendor,Lot No,Material,Description,Qty Received,Unit,GRN Date,Best Before,CoA No,supplier_code_normalized,lot_code_normalized,material_code_normalized,quantity_normalized,unit_normalized,grn_date_normalized,best_before_normalized
+sup-1,AB-7781,ing-paprika,Smoked paprika powder,500,kgs,04/03/2026,04/03/2027,COA-77810,SUP0001,AB7781,ING-PAPRIKA,500,KG,2026-03-04,2027-03-04
+SUP0001,AB-7790,ING-PAPRIKA,Smoked paprika powder,400,KG,2026-03-06,2027-03-06,COA-77900,SUP0001,AB7790,ING-PAPRIKA,400,KG,2026-06-03,2027-06-03
+Supplier 2,DD-2201,ING-MILKPOWDER,Skimmed milk powder,"1,000",kg,5-Mar-2026,5-Sep-2026,COA-22010,,DD2201,ING-MILKPOWDER,1000,KG,2026-03-05,2026-09-05
+SUP0003,co 5510,ING-SUNOIL,Refined sunflower oil,2000,LTR,2026-03-02,2026-12-02,COA-55100,SUP0003,CO5510,ING-SUNOIL,2000,L,2026-02-03,2026-02-12
+NFM,NF-3300,ING-FLOUR,Wheat flour (maida),3000,kg,03.03.2026,03.06.2026,COA-33000,SUP0004,NF3300,ING-FLOUR,3000,KG,2026-03-03,2026-06-03
