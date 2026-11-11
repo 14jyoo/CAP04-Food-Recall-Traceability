@@ -40,7 +40,7 @@ app:
     # relative to the classpath (bundled copy) - override with file:/path to point at ../data/sample
     location: classpath:seed/
   cors:
-    allowed-origins: "http://localhost:5173,http://localhost:3000"
+  allowed-origins: "http://localhost:5173,http://localhost:3000,http://13.233.148.254:3000"
 
 ---
 # ---------------------------------------------------------------- AWS / RDS PostgreSQL
