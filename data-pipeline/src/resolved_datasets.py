@@ -1,4 +1,3 @@
-
 import pandas as pd
 from pathlib import Path
 
@@ -11,8 +10,8 @@ DATASET_FILES = {
 }
 
 SUPPLIER_COLUMNS = {
-    "supplier_lots": "supplier_code",
-    "goods_receipts": "supplier_code"
+    "supplier_lots": "supplier_code_normalized",
+    "goods_receipts": "supplier_code_normalized"
 }
 
 
@@ -24,9 +23,8 @@ def generate_resolved_datasets():
     )
 
     for dataset, filename in DATASET_FILES.items():
-
         input_file = PROCESSED_DIR / filename
-        dataframe = pd.read_csv(input_file, dtype=str)
+        dataframe = pd.read_csv(input_file, dtype=str).fillna("")
 
         supplier_column = SUPPLIER_COLUMNS[dataset]
 
@@ -36,7 +34,6 @@ def generate_resolved_datasets():
         ]
 
         for _, decision in approved.iterrows():
-
             record_id = decision["record_id"]
             original_code = decision["original_code"]
             approved_code = decision["approved_supplier"]
@@ -48,17 +45,25 @@ def generate_resolved_datasets():
 
             if dataset == "supplier_lots":
                 record_mask = dataframe["Lot No"] == record_id
+                original_column = "Vendor"
             else:
                 record_mask = dataframe["GRN No"] == record_id
+                original_column = "Vendor ID"
 
-            record_mask &= dataframe[supplier_column] == original_code
+            record_mask &= dataframe[original_column] == original_code
 
             if record_mask.sum() != 1:
                 raise ValueError(
-                    f"Expected exactly one matching record for {record_id}"
+                    f"Expected exactly one matching record for {record_id}; "
+                    f"found {record_mask.sum()}"
                 )
 
             dataframe.loc[record_mask, supplier_column] = approved_code
+
+            print(
+                f"Approved: {record_id} | "
+                f"{original_code} -> {approved_code}"
+            )
 
         output_file = PROCESSED_DIR / filename.replace(
             "_clean.csv", "_resolved.csv"
