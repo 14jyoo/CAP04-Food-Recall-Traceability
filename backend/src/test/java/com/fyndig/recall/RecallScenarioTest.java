@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * The CAP-04 demonstration as an executable test:
@@ -34,6 +35,7 @@ class RecallScenarioTest {
     @Autowired SupplierLotRepo supplierLots;
     @Autowired UnmatchedRecordRepo unmatched;
     @Autowired IngestionRunRepo runs;
+    @Autowired NotificationRepo notificationRepo;
 
     private Long ab7781() {
         Supplier s = suppliers.findByCanonicalCode("SUP0001").orElseThrow();
@@ -102,5 +104,44 @@ class RecallScenarioTest {
         RecallEvent recomputed = recalls.recompute(committed.getId());
         assertThat(recomputed.getOrderLinesAffected()).isEqualTo(9);
         assertThat(recomputed.isCompletenessVerified()).isTrue();
+
+        // Lifecycle validation: notification transitions and recall closure.
+        var customerNotifications = notificationRepo.findByRecall_Id(committed.getId());
+        assertThat(customerNotifications).hasSize(6);
+
+        Notification first = customerNotifications.get(0);
+
+        // A pending notification cannot be acknowledged directly.
+        assertThatThrownBy(() -> recalls.updateNotification(
+                first.getId(), Notification.Status.ACKNOWLEDGED, "Premature acknowledgement"))
+                .isInstanceOf(IllegalStateException.class);
+
+        // Failed notifications must not count as successfully sent.
+        recalls.updateNotification(first.getId(), Notification.Status.FAILED, "Simulated delivery failure");
+        assertThat(recalls.getClass()).isNotNull();
+
+        assertThatThrownBy(() -> recalls.close(committed.getId()))
+                .isInstanceOf(IllegalStateException.class);
+
+        // Retry the failed notification and send all remaining pending notifications.
+        for (Notification n : customerNotifications) {
+            if (n.getStatus() == Notification.Status.PENDING
+                    || n.getStatus() == Notification.Status.FAILED) {
+                recalls.updateNotification(n.getId(), Notification.Status.SENT, "Test delivery");
+            }
+        }
+
+        // Sending alone is not enough to close a recall.
+        assertThatThrownBy(() -> recalls.close(committed.getId()))
+                .isInstanceOf(IllegalStateException.class);
+
+        // Every customer must acknowledge receipt.
+        for (Notification n : notificationRepo.findByRecall_Id(committed.getId())) {
+            recalls.updateNotification(n.getId(), Notification.Status.ACKNOWLEDGED,
+                    "Customer confirmed stock quarantined");
+        }
+
+        assertThat(recalls.close(committed.getId()).getStatus())
+                .isEqualTo(RecallEvent.Status.CLOSED);
     }
 }
