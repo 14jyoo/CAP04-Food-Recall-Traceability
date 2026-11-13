@@ -37,10 +37,10 @@ save_csv(supplier_feed, "suppliers.csv")
 
 
 # 2. SUPPLIER LOTS
-lots = read_csv("supplier_lots_clean.csv")
+lots = read_csv("supplier_lots_resolved.csv")
 
 supplier_lots_feed = pd.DataFrame({
-    "supplierCode": lots["Vendor"],
+    "supplierCode": lots["supplier_code_normalized"],
     "lotCode": lots["Lot No"],
     "ingredientCode": lots["material_code_normalized"],
     "ingredientName": lots["Description"],
@@ -55,11 +55,11 @@ save_csv(supplier_lots_feed, "supplier_lots.csv")
 
 
 # 3. GOODS RECEIPTS
-receipts = read_csv("goods_receipts_clean.csv")
+receipts = read_csv("goods_receipts_resolved.csv")
 
 receipts_feed = pd.DataFrame({
     "internalLotCode": receipts["Plant Lot"],
-    "supplierCode": receipts["Vendor ID"],
+    "supplierCode": receipts["supplier_code_normalized"],
     "supplierLotCode": receipts["Vendor Lot"],
     "ingredientCode": receipts["material_code_normalized"],
     "ingredientName": receipts["Material Name"],

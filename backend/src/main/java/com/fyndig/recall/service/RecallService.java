@@ -267,16 +267,43 @@ public class RecallService {
     @Transactional
     public Notification updateNotification(Long notificationId, Notification.Status status, String note) {
         Notification n = notifications.findById(notificationId).orElseThrow();
+        RecallEvent r = n.getRecall();
+
+        if (status == null) {
+            throw new IllegalArgumentException("Notification status is required");
+        }
+        if (r.getStatus() == RecallEvent.Status.CLOSED) {
+            throw new IllegalStateException("Cannot update notifications for a closed recall");
+        }
+
+        Notification.Status current = n.getStatus();
+        boolean allowed = current == status
+                || (current == Notification.Status.PENDING
+                    && (status == Notification.Status.SENT || status == Notification.Status.FAILED))
+                || (current == Notification.Status.FAILED && status == Notification.Status.SENT)
+                || (current == Notification.Status.SENT && status == Notification.Status.ACKNOWLEDGED);
+
+        if (!allowed) {
+            throw new IllegalStateException("Invalid notification transition: " + current + " -> " + status);
+        }
+
+        LocalDateTime now = LocalDateTime.now();
         n.setStatus(status);
         if (note != null) n.setNote(note);
-        LocalDateTime now = LocalDateTime.now();
         if (status == Notification.Status.SENT && n.getSentAt() == null) n.setSentAt(now);
-        if (status == Notification.Status.ACKNOWLEDGED) { if (n.getSentAt() == null) n.setSentAt(now); n.setAcknowledgedAt(now); }
+        if (status == Notification.Status.ACKNOWLEDGED) {
+            if (n.getSentAt() == null) n.setSentAt(now);
+            if (n.getAcknowledgedAt() == null) n.setAcknowledgedAt(now);
+        }
         notifications.save(n);
 
-        RecallEvent r = n.getRecall();
-        if (notifications.countByRecall_IdAndStatusNot(r.getId(), Notification.Status.PENDING) == notifications.findByRecall_Id(r.getId()).size()
-                && r.getAllNotifiedAt() == null) {
+        List<Notification> recallNotifications = notifications.findByRecall_Id(r.getId());
+        boolean allSent = !recallNotifications.isEmpty()
+                && recallNotifications.stream().allMatch(item ->
+                    item.getStatus() == Notification.Status.SENT
+                    || item.getStatus() == Notification.Status.ACKNOWLEDGED);
+
+        if (allSent && r.getAllNotifiedAt() == null) {
             r.setAllNotifiedAt(now);
             recalls.save(r);
         }
@@ -286,6 +313,24 @@ public class RecallService {
     @Transactional
     public RecallEvent close(Long recallId) {
         RecallEvent r = recalls.findById(recallId).orElseThrow();
+
+        if (r.getStatus() == RecallEvent.Status.CLOSED) return r;
+        if (r.getStatus() == RecallEvent.Status.SIMULATED) {
+            throw new IllegalStateException("A simulation-only recall cannot be closed");
+        }
+        if (r.getLineageComputedAt() == null || !r.isCompletenessVerified()
+                || r.getUnresolvedReferences() != 0) {
+            throw new IllegalStateException("Cannot close recall: lineage completeness is not verified");
+        }
+
+        List<Notification> recallNotifications = notifications.findByRecall_Id(recallId);
+        boolean allAcknowledged = recallNotifications.stream()
+                .allMatch(item -> item.getStatus() == Notification.Status.ACKNOWLEDGED);
+
+        if (!allAcknowledged) {
+            throw new IllegalStateException("Cannot close recall: all customer notifications must be acknowledged");
+        }
+
         r.setStatus(RecallEvent.Status.CLOSED);
         r.setClosedAt(LocalDateTime.now());
         return recalls.save(r);

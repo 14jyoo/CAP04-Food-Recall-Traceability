@@ -37,7 +37,7 @@ export default function Notifications({ params }) {
               <div className="actions">
                 <button onClick={() => act(() => api.recompute(r.id))} title="Re-run lineage (after reconciliation)">Recompute scope</button>
                 <button onClick={() => act(() => api.sendAll(r.id))} disabled={!ns.some(n => n.status === 'PENDING')}>Send all pending</button>
-                <button className="secondary" onClick={() => act(() => api.closeRecall(r.id))} disabled={r.status === 'CLOSED'}>Close recall</button>
+                <button className="secondary" onClick={() => act(() => api.closeRecall(r.id))} disabled={r.status === 'CLOSED' || !r.completenessVerified || r.unresolvedReferences !== 0 || ns.length === 0 || !ns.every(n => n.status === 'ACKNOWLEDGED')}>Close recall</button>
               </div>
             </div>
             <div className="kpis">
@@ -47,7 +47,7 @@ export default function Notifications({ params }) {
               <Kpi label="Completeness" value={r.completenessVerified ? 'proven' : 'not proven'} tone={r.completenessVerified ? 'ok' : 'bad'} />
               <Kpi label="Time to lineage" value={detail.minutesToLineage != null ? `${detail.minutesToLineage} min` : '–'} />
               <Kpi label="Time to notify all" value={detail.minutesToAllNotified != null ? `${detail.minutesToAllNotified} min` : 'in progress'} />
-              <Kpi label="Sent" value={`${ns.filter(n => n.status !== 'PENDING').length}/${ns.length}`} />
+              <Kpi label="Sent" value={`${ns.filter(n => n.status === 'SENT' || n.status === 'ACKNOWLEDGED').length}/${ns.length}`} />
               <Kpi label="Acknowledged" value={`${ns.filter(n => n.status === 'ACKNOWLEDGED').length}/${ns.length}`} />
             </div>
           </>
@@ -67,7 +67,7 @@ export default function Notifications({ params }) {
               { label: '', render: n => (
                 <div className="row-actions">
                   {n.status === 'PENDING' && <button className="small" onClick={() => act(() => api.updateNotification(n.id, 'SENT'))}>Mark sent</button>}
-                  {n.status !== 'ACKNOWLEDGED' && <button className="small" onClick={() => act(() => api.updateNotification(n.id, 'ACKNOWLEDGED', 'Customer confirmed stock quarantined'))}>Acknowledge</button>}
+                  {n.status === 'SENT' && <button className="small" onClick={() => act(() => api.updateNotification(n.id, 'ACKNOWLEDGED', 'Customer confirmed stock quarantined'))}>Acknowledge</button>}
                   {n.status === 'PENDING' && <button className="small secondary" onClick={() => act(() => api.updateNotification(n.id, 'FAILED', 'Bounce'))}>Failed</button>}
                 </div>) },
             ]} />
